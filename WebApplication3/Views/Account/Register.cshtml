@@ -1,0 +1,195 @@
+﻿@model WebApplication3.Models.RegisterViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="~/js/register.js"></script>
+    <link rel="stylesheet" href="~/css/style.css">
+    <style>
+     
+    </style>
+</head>
+<body>
+      <div class="banner">
+        <strong> <h1>Techbank</h1> </strong>
+        <p>Banking with Integrity</p>
+        <p>Sign up</p>
+    </div>
+
+    <div class="container" >
+        <div class="form-header" style="background-color:#85D7D2;">
+            <div class="card-header text-center">
+               
+            </div>
+            <div class="steps">
+                <div class="step active" id="step1">1. Details</div>
+                <div class="step" id="step2">2. Passcode</div>
+                <div class="step" id="step3">3. Confirmation</div>
+                <div class="step" id="step4">4. Done</div>
+            </div>
+        </div>
+
+        <form asp-action="Register" asp-controller="Account" method="post" id="regForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Step 1: Details -->
+            <div class="tab active">
+                <h3>Details</h3>
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" id="Password" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <label asp-for="RePassword">Re-enter Password</label>
+                <input asp-for="RePassword" type="password" id="RePassword" required />
+                <span asp-validation-for="RePassword" class="text-danger"></span>
+                <span class="text-danger" id="passwordMatchError"></span>
+
+                <label asp-for="Name">Full Name</label>
+                <input asp-for="Name" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+
+                <label asp-for="DateOfBirth">Date of Birth</label>
+                <input asp-for="DateOfBirth" type="date" required />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                <span class="text-danger" id="dobError"></span>
+
+                <label asp-for="ContactNumber">Contact Number</label>
+                <input asp-for="ContactNumber" placeholder="e.g., +639123456789" required />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                <span class="text-info">Please enter your contact number in the format +63xxxxxxxxxx.</span>
+                <span class="text-danger" id="contactNumberError"></span>
+
+                <label asp-for="Email">Email Address</label>
+                <input asp-for="Email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <span class="text-danger" id="emailError"></span>
+
+                <label asp-for="Address">Address</label>
+                <input asp-for="Address" required />
+                <span asp-validation-for="Address" class="text-danger"></span>
+
+                <label asp-for="Branch">Branch</label>
+                <input asp-for="Branch" required />
+                <span asp-validation-for="Branch" class="text-danger"></span>
+
+                <label asp-for="AccountType">Card Type</label>
+                <select asp-for="AccountType" required>
+                    <option value="deposit">Deposit Card</option>
+                    <option value="credit">Credit Card</option>
+                </select>
+                <span asp-validation-for="AccountType" class="text-danger"></span>
+
+                <label asp-for="AccountNumber">Account Number</label>
+                <input asp-for="AccountNumber" required placeholder="##########" required />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                <span class="text-info">Account number should be exactly 10 characters </span>
+                <span class="text-danger" id="accountNumberError"></span>
+
+                <label>
+                    <input type="checkbox" id="privacyPolicy" name="privacy-policy" required> I allow Techbank to collect and process my data under its Privacy Policy, and I also agree to the <a>Terms of Use of the service and Conditions.  </a>
+                </label>
+                <span class="text-danger" id="privacyPolicyError"></span>
+            </div>
+
+            <!-- Step 2: Passcode -->
+            <div class="tab">
+                <h3>Passcode</h3>
+                <label for="pin">PIN</label>
+                <input type="password" id="pin" name="pin" required />
+                <span class="text-danger" id="pinError"></span>
+
+                <label for="re-pin">Re-enter PIN</label>
+                <input type="password" id="re-pin" name="re-pin" required />
+                <span class="text-danger" id="rePinError"></span>
+                <span class="text-danger" id="pinMatchError"></span>
+
+                <label for="SecurityQuestion1">Security Question 1</label>
+                <select id="SecurityQuestion1" name="SecurityQuestion1" required>
+                    <option value="question1">What is your mother's maiden name?</option>
+                    <option value="question2">What is your favorite pet's name?</option>
+                    <option value="question2">What is the name of your first school?</option>
+                </select>
+                <span class="text-danger" id="securityQuestion1Error"></span>
+
+                <label for="answer1">Answer 1</label>
+                <input type="text" id="answer1" name="answer1" required />
+                <span class="text-danger" id="answer1Error"></span>
+
+                <label for="SecurityQuestion2">Security Question 2</label>
+                <select id="SecurityQuestion2" name="SecurityQuestion2" required>
+                    <option value="question3">What is your favorite movie?</option>
+                    <option value="question4">What is your dream job?</option>
+                    <option value="question5">What is your favorite book?</option>
+                    <option value="question6">What is your favorite food?</option>
+                </select>
+                <span class="text-danger" id="securityQuestion2Error"></span>
+
+                <label for="answer2">Answer 2</label>
+                <input type="text" id="answer2" name="answer2" required />
+                <span class="text-danger" id="answer2Error"></span>
+            </div>
+            <!-- Step 3: Confirmation -->
+            <div class="tab">
+                <h3>Confirmation</h3>
+                <div id="confirmation-details">
+                    <!-- This will be dynamically populated with user details in JavaScript -->
+                </div>
+            </div>
+
+            <!-- Step 4: Done -->
+            <div class="tab">
+                <h3>Done</h3>
+                <p>If all the information provided is correct, please click the submit button to finish the registration process. Thank you and welcome to Techbank - Banking with Integrity!</p>
+            </div>
+
+            <!-- Form navigation buttons -->
+            <div class="form-navigation">
+                <button type="button" id="prevBtn">Previous</button>
+                <button type="button" id="nextBtn">Next</button>
+                <button type="submit" id="submitBtn">Submit</button>
+            </div>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="/Account/Login">Login</a>
+        </div>
+    </div>
+
+
+    <style>
+        .banner {
+            background-image: url('/images/background4.JPG');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Khula', sans-serif;
+            text-align: center;
+            color: darkslategrey;
+            padding: 20px;
+        }
+
+        .banner h1 {
+            font-family: 'Khula', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .banner p {
+            font-family: 'Khula', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+    </style>
+</body>
+</html>

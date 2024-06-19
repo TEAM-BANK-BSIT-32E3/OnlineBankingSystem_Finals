@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/login.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header text-center" style="background-color: #980cd4; color: whitesmoke;">
+                        <h2> Banking with Integrity</h2>
+                        <h4> Techbank </h4>
+                    </div>
+                    <div class="card-body">
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @TempData["ErrorMessage"]
+                            </div>
+                        }
+                        <form asp-action="Login" method="post">
+                            <div class="form-group row">
+                                <label for="username" class="col-sm-2 col-form-label form-label">
+                                    <i class="fas fa-user"></i>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="username" placeholder="Username" name="Username" class="form-control" required />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-2 col-form-label form-label">
+                                    <i class="fas fa-lock"></i>
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="password" id="password" placeholder="Password" name="Password" class="form-control" required />
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" style="background-color: #980cd4; color: whitesmoke;" >Login</button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/Account/Register" style="color: dimgrey; text-decoration: none; " >Signup</a>
+                        <br /> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

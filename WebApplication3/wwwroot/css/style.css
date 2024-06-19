@@ -1,0 +1,116 @@
+﻿body {
+    background-image: url('~/images/background1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+    font-family: 'Khula', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    color: dimgrey;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+   
+    color: darkslategrey;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.step {
+    flex: 1;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    text-align: center;
+    font-weight: bold;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.step.active {
+    border-bottom: 2px solid #007bff;
+    color: whitesmoke;
+}
+
+.tab {
+    display: none;
+}
+
+    .tab.active {
+        display: block;
+    }
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+    input[type="checkbox"] {
+        width: auto;
+    }
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    button#prevBtn {
+        background-color: #ccc;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    button#prevBtn:hover {
+        background-color: #999;
+    }
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text-danger {
+    color: red;
+}
+
+.invalid {
+    border-color: red;
+}

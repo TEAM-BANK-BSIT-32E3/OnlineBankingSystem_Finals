@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Dashboard</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    @{
+        bool includeSidebar = !Context.Request.Path.StartsWithSegments("/account/login") && !Context.Request.Path.StartsWithSegments("/account/register");
+    }
+
+    @if (includeSidebar)
+    {
+        <div class="sidebar">
+            <div class="sidebar-header">
+               
+                <div>
+                    <h1>  <img src="~/images/logo.png" alt="Logo" /> Techbank</h1>
+                    <h5>Banking with Integrity</h5>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="@Url.Action("Index", "Home")"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
+                <hr />
+                <label style="margin-left: 20px; color: dimgrey">USER PREFERENCES</label>
+                <li><a href="@Url.Action("Inbox", "Account")"><i class="fas fa-inbox fa-fw"></i> Inbox</a></li>
+                <li><a href="@Url.Action("MoneyRequests", "Account")"><i class="fas fa-money-bill-wave fa-fw"></i> Money Requests</a></li>
+                <li><a href="@Url.Action("Settings", "Home")"><i class="fas fa-cog fa-fw"></i> Settings</a></li>
+                <hr />
+                <label style="margin-left: 20px; color: dimgrey">OTHER</label>
+                <li><a href="@Url.Action("Logout", "Account")"><i class="fas fa-sign-out-alt fa-fw"></i> Logout</a></li>
+            </ul>
+        </div>
+    }
+
+    <div class="content">
+        @RenderBody()
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

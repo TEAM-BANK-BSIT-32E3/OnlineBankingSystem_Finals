@@ -1,0 +1,166 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+}
+
+
+<link rel="stylesheet" href="~/css/site.css">
+
+<body>
+  
+    <div class="container mt-5" style="max-width: 70%;">
+
+       
+<div class="content">
+
+<form method="post" asp-action="SendOtp">
+                <p>
+                    Contact Number: @ViewBag.ContactNumber
+                </p>
+                @if (ViewBag.ContactVerified == true)
+                {
+                    <p style="color: green;">Contact Number is verified!</p>
+                }
+                else
+                {
+                    <p style="color: red;">Contact Number is not yet verified.</p>
+                }
+                @if (ViewBag.OtpSent != null)
+                {
+                    if (ViewBag.OtpSent)
+                    {
+                        <p style="color: green;">OTP has been sent successfully!</p>
+                        <script>
+                            $(document).ready(function () {
+                                $('#otpModal').modal('show');
+                                startCountdown(@ViewBag.RemainingTime);
+                                $('#reopenOtpModalButton').show(); // Show the button when OTP is sent
+                            });
+                        </script>
+                    }
+                    else
+                    {
+                        <p style="color: red;">@ViewBag.ErrorMessage</p>
+                        <script>
+                            $(document).ready(function () {
+                                startCountdown(@ViewBag.RemainingTime);
+                                $('#reopenOtpModalButton').hide(); // Hide the button if OTP is not sent
+                            });
+                        </script>
+                    }
+                }
+
+                @if (ViewBag.OtpVerified != null)
+                {
+                    if (ViewBag.OtpVerified)
+                    {
+                        <p style="color: green;">OTP verified successfully!</p>
+                        <script>
+                            $(document).ready(function () {
+                                $('#reopenOtpModalButton').hide(); // Hide the button when OTP is verified
+                            });
+                        </script>
+                    }
+                    else
+                    {
+                        <p style="color: red;">Invalid OTP. Please try again.</p>
+                    }
+                }
+    <div class="form-group">
+           
+        <label for="contactNumber"> (+639 format)</label>
+        <input type="text" class="form-control" id="contactNumber" name="contactNumber" required value="@ViewBag.ContactNumber">
+    </div>
+    <button type="submit" id="sendOtpButton" class="btn btn-primary">Send OTP</button>
+    <button type="button" id="reopenOtpModalButton" class="btn btn-primary" style="display: none;">Reopen Verify OTP</button>
+    <p id="countdownText" style="display:none;">You can resend OTP in <span id="countdown"></span> seconds.</p>
+</form>
+
+<!-- OTP Verification Modal -->
+<div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="otpModalLabel">Verify OTP</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="verifyOtpForm" asp-action="VerifyOtp">
+                    <div class="form-group">
+                        <label for="otpInput">Enter OTP</label>
+                        <input type="text" class="form-control" id="otpInput" name="enteredOtp" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify</button>
+                </form>
+                <div id="otpMessage" class="mt-2">
+                    @if (ViewBag.OtpVerified != null && ViewBag.OtpVerified == false)
+                    {
+                        <p style="color: red;">Invalid OTP. Please try again.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Password Update Form -->
+<form method="post" asp-action="UpdatePassword">
+    <hr />
+    <h4>Update Password</h4>
+    <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+    </div>
+    <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+    </div>
+    <div class="form-group">
+        <label for="confirmNewPassword">Confirm New Password</label>
+        <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Password</button>
+</form>
+
+@if (ViewBag.PasswordUpdateMessage != null)
+{
+    <p>@ViewBag.PasswordUpdateMessage</p>
+}
+
+
+<!-- PIN Update Form -->
+<form method="post" asp-action="UpdatePin">
+    <hr />
+    <h4>Update PIN</h4>
+    <div class="form-group">
+        <label for="currentPin">Current PIN</label>
+        <input type="password" class="form-control" id="currentPin" name="currentPin" required>
+    </div>
+    <div class="form-group">
+        <label for="newPin">New PIN</label>
+        <input type="password" class="form-control" id="newPin" name="newPin" required>
+    </div>
+    <div class="form-group">
+        <label for="confirmNewPin">Confirm New PIN</label>
+        <input type="password" class="form-control" id="confirmNewPin" name="confirmNewPin" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update PIN</button>
+</form>
+
+@if (ViewBag.PinUpdateMessage != null)
+{
+    <p>@ViewBag.PinUpdateMessage</p>
+}
+
+
+</div>
+</container>
+</body>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+  
+}

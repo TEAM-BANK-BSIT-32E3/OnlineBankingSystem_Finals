@@ -1,0 +1,22 @@
+﻿<!-- Views/Shared/_Layout.cshtml -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - My ASP.NET Core Application</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div id="sidebar-container">
+        @await Html.PartialAsync("_Sidebar")
+    </div>
+    <div id="main-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/js/site.js"></script>
+</body>
+</html>

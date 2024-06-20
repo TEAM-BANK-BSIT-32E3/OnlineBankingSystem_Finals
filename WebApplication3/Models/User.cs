@@ -12,11 +12,7 @@
         public bool Contact_verified { get; set; } 
 
 
-        public string Email { get; set; }
-        public string Address { get; set; }
-        public string Branch { get; set; }
-        public string AccountType { get; set; }
-        public string AccountNumber { get; set; }
+      
 
          public decimal Balance { get; set; }
 

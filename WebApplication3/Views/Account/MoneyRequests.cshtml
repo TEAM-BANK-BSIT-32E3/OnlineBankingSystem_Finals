@@ -1,0 +1,82 @@
+﻿@model List<WebApplication3.Models.Transaction>
+@{
+    ViewData["Title"] = "Money Requests";
+    // Set the culture to Philippines
+    var culture = new System.Globalization.CultureInfo("en-PH");
+    var numberFormatInfo = culture.NumberFormat;
+}
+
+<link rel="stylesheet" href="~/css/site.css"> <!-- Replace with your CSS file path -->
+
+<div class="container mt-5" style="max-width: 70%;">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Money Requests</h2>
+
+                    @* Display success message if TempData["Success"] is set *@
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    @* Display error message if TempData["RequestMoneyError"] is set *@
+                    @if (TempData["RequestMoneyError"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["RequestMoneyError"]
+                        </div>
+                    }
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Transaction ID</th>
+                                    <th scope="col">Account Name</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var transaction in Model)
+                                {
+                                    <tr>
+                                        <td>@transaction.TransactionId</td>
+                                        <td>@transaction.AccountName</td>
+                                        <td>@transaction.Amount.ToString("C", numberFormatInfo)</td>
+                                        <td>@transaction.Description</td>
+                                        <td>@transaction.RequestStatus</td>
+                                        <td>
+                                            @if (transaction.RequestStatus == "Accepted")
+                                            {
+                                                <span class="text-muted">Already Accepted</span>
+                                            }
+                                            else if (transaction.RequestStatus == "Rejected")
+                                            {
+                                                <span class="text-muted">Already Rejected</span>
+                                            }
+                                            else
+                                            {
+                                                <form asp-controller="Account" asp-action="ProcessRequestMoney" method="post">
+                                                    <input type="hidden" name="transactionId" value="@transaction.TransactionId" />
+                                                    <button type="submit" name="action" value="accept" class="btn btn-success">Accept</button>
+                                                    <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

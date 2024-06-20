@@ -16,9 +16,9 @@ namespace WebApplication3.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly string _infobipApiKey = "212952af9d98fc971b0aa3735e4d5684-9d867386-32dd-4a29-81f7-1bc5f1dbb225";
+        private readonly string _infobipApiKey = "feb1f237f083f04968dd83bd9a0a44b9-c1360cb7-e98b-4a0c-8e25-2af7bc57a041";
         private readonly string _infobipBaseUrl = "https://api.infobip.com/sms/2/text/single";
-        private readonly string _infobipPhoneNumber = "+639203614524";
+        private readonly string _infobipPhoneNumber = "+639060525801";
 
         public HomeController(ApplicationDbContext context)
         {
